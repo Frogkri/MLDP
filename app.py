@@ -31,12 +31,18 @@ st.sidebar.header("Clinical Measurements")
 glucose = st.sidebar.number_input("Average Glucose Level (mg/dL)", 50.0, 300.0, 100.0)
 bmi = st.sidebar.number_input("BMI", 10.0, 60.0, 25.0)
 
-# 4. Data Processing for Model
+# 4. Data Processing for Model (Updated to match Notebook logic)
 input_data = pd.DataFrame({
-    'gender': [gender], 'age': [age], 'hypertension': [1 if hypertension == "Yes" else 0],
-    'heart_disease': [1 if heart_disease == "Yes" else 0], 'ever_married': [ever_married],
-    'work_type': [work_type], 'Residence_type': [residence], 'avg_glucose_level': [glucose],
-    'bmi': [bmi], 'smoking_status': [smoking]
+    'gender': [gender],
+    'age': [float(age)], # Ensure numerical consistency
+    'hypertension': [str(1 if hypertension == "Yes" else 0)], # Convert to string to match Categorical Encoder
+    'heart_disease': [str(1 if heart_disease == "Yes" else 0)], # Convert to string to match Categorical Encoder
+    'ever_married': [ever_married],
+    'work_type': [work_type],
+    'Residence_type': [residence],
+    'avg_glucose_level': [float(glucose)],
+    'bmi': [float(bmi)],
+    'smoking_status': [smoking]
 })
 
 # 5. Prediction Logic
